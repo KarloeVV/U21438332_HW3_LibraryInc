@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null; // Disabling layout for this view
+}
+
+@model LibraryInc.Models.ChartData // Define the model for this view
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gender Distribution Chart</title>
+
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Include Bootstrap and related libraries -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- Sidebar for navigation -->
+    <div id="sidebar" class="sidebar-toggle">
+        <!-- Sidebar navigation items and sub-menus -->
+    </div>
+    <!-- /#sidebar -->
+
+    <h1>Gender Distribution Report</h1>
+    <table>
+        <tr>
+            <th>Gender</th>
+            <th>Count</th>
+        </tr>
+        <!-- Display a table of gender distribution data -->
+    </table>
+
+    <!-- Canvas for Gender Distribution Chart -->
+    <div style="width: 50%;">
+        <canvas id="genderChart"></canvas>
+    </div>
+
+    <!-- Button to export the chart -->
+    <button id="exportChart">Export Chart</button>
+
+    <!-- Hidden image element for exporting the chart -->
+    <img id="exportedImage" style="display: none;">
+
+    <p>
+        <!-- Report content, recommendations, and conclusion -->
+    </p>
+
+    <script>
+        // JavaScript code for rendering the Gender Distribution Chart
+        // Extract data from the Razor model and create a bar chart
+
+        function exportChart() {
+            // Export the chart as an image
+        }
+
+        // Attach the exportChart function to a button click event
+
+    </script>
+
+    <script>
+        // JavaScript for enabling sidebar navigation and adding active class to current link
+
+        // Initialize jQuery and other behaviors
+    </script>
+</body>
+</html>

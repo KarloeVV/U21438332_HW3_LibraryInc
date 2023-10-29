@@ -1,0 +1,251 @@
+﻿@model LibraryInc.Models.StudentBookViewModel
+@{
+    ViewBag.Title = "StudentBook";
+}
+
+@using PagedList.Mvc
+<style>
+
+    .create-lookup-link {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+        /* Change the button color on hover */
+        .create-lookup-link:hover {
+            background-color: #27898b;
+        }
+</style>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="col">
+            <a href="@Url.Action("Create", "Authors")" class="btn btn-lg" style="border-radius: 20px; background-color:#27898b; color:white">Create</a>
+        </div>
+        <h1>Authors</h1>
+
+        <table class="table" style="width:100%">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Authors.FirstOrDefault().name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Authors.FirstOrDefault().surname)
+                </th>
+
+            </tr>
+            @foreach (var item in Model.Authors)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.surname)
+                    </td>
+
+                    <td class="text-end">
+
+                        <a href="#" class="edit-link" data-url="@Url.Action("Edit", "Authors", new { id = item.authorId })">Edit</a>
+                        <a href="#" class="details-link" data-url="@Url.Action("Details", "Authors", new { id = item.authorId })">Details</a>
+                        <a href="#" class="delete-link" data-url="@Url.Action("Delete", "Authors", new { id = item.authorId })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="col">
+            <a href="@Url.Action("Create", "Types")" class="btn btn-lg" style="border-radius: 20px; background-color:#27898b; color:white">Create</a>
+        </div>
+
+        <h1>Types</h1>
+        <table class="table" style="width:100%">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Types.FirstOrDefault().name)
+                </th>
+
+
+            </tr>
+            @foreach (var item in Model.Types)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+
+
+                    <td class="text-end">
+
+                        <a href="#" class="edit-link" data-url="@Url.Action("Edit", "Types", new { id = item.typeId })">Edit</a>
+                        <a href="#" class="details-link" data-url="@Url.Action("Details", "Types", new { id = item.typeId })">Details</a>
+                        <a href="#" class="delete-link" data-url="@Url.Action("Delete", "Types", new { id = item.typeId })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+
+        <div class="pagination" style="margin-left: 50px;">
+            Page @(Model.Types.PageCount < Model.Types.PageNumber ? 0 : Model.Types.PageNumber)
+            of @Model.Types.PageCount
+            <br />
+            <div style="margin-top: 30px;">
+                @Html.PagedListPager(Model.Types, Page => Url.Action("TypeAuthorBorrows", new { Page }))
+            </div>
+        </div>
+    </div>
+
+
+    <div id="myModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-content">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-content">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="col">
+            <a href="@Url.Action("Create", "Borrows")" class="btn btn-lg" style="border-radius: 20px; background-color:#27898b; color:white">Create</a>
+        </div>
+
+        <h1>Borrows</h1>
+        <table class="table" style="width:100%">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrows.FirstOrDefault().students.name)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrows.FirstOrDefault().books.name)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrows.FirstOrDefault().takenDate)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrows.FirstOrDefault().broughtDate)
+                </th>
+
+
+            </tr>
+            @foreach (var item in Model.Borrows)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.students.name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.books.name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.takenDate)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.broughtDate)
+                    </td>
+
+
+                    <td class="text-end">
+
+                        <a href="#" class="edit-link" data-url="@Url.Action("Edit", "Borrows", new { id = item.borrowId })">Edit</a>
+                        <a href="#" class="details-link" data-url="@Url.Action("Details", "Borrows", new { id = item.borrowId })">Details</a>
+                        <a href="#" class="delete-link" data-url="@Url.Action("Delete", "Borrows", new { id = item.borrowId })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="pagination" style="margin-left: 50px;">
+            Page @(Model.Borrows.PageCount < Model.Borrows.PageNumber ? 0 : Model.Borrows.PageNumber)
+            of @Model.Borrows.PageCount
+            <br />
+            <div style="margin-top: 30px;">
+                @Html.PagedListPager(Model.Borrows, Page => Url.Action("TypeAuthorBorrows", new { Page }))
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-content">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        // Function to handle Edit link click event in the Combined View and Details modal
+        $(".edit-link, .edit-link-in-modal").click(function (e) {
+            e.preventDefault();
+            var url = $(this).data("url");
+
+            $.get(url, function (data) {
+                $("#modal-content").empty();
+                $("#modal-content").html(data);
+                $("#myModal").modal("show");
+            });
+        });
+
+        // Function to handle form submission within the modal
+        $("#modal-content").on("submit", "form", function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr("action");
+            var formData = form.serialize();
+
+            $.post(url, formData, function (data) {
+                $("#myModal").modal("hide");
+                location.reload();
+            });
+        });
+
+        // Function to handle other links (details, delete, create) within the modal
+        $(".details-link, .delete-link, .create-link, .create-lookup-link").click(function (e) {
+            e.preventDefault();
+            var url = $(this).data("url");
+
+            $.get(url, function (data) {
+                $("#modal-content").empty();
+                $("#modal-content").html(data);
+                $("#myModal").modal("show");
+            });
+        });
+    });
+</script>

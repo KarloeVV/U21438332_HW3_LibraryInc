@@ -1,0 +1,71 @@
+﻿<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Set the model type for this view -->
+@model LibraryInc.Models.ChartData
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class Distribution Chart</title>
+
+    <!-- Include Chart.js library again (duplicated) - consider removing one -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Include Bootstrap and related libraries -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar-toggle">
+        <!-- Sidebar navigation items -->
+        <!-- Define links and sub-menus -->
+    </div>
+    <!-- /#sidebar -->
+    <!-- Canvas for Scatter Chart -->
+    <canvas id="scatterChart" width="400" height="400"></canvas>
+
+    <h3>Students by Class:</h3>
+    <table>
+        <tr>
+            <th>Class Name</th>
+            <th>Total Students</th>
+        </tr>
+        <!-- Display a table of students by class -->
+    </table>
+
+    <!-- Canvas for Class Pie Chart -->
+    <div style="width: 50%;">
+        <canvas id="classPieChart"></canvas>
+    </div>
+
+    <!-- Button to export the chart -->
+    <button id="exportChart">Export Chart</button>
+
+    <!-- Hidden image element for exporting the chart -->
+    <img id="exportedImage" style="display: none;">
+
+    <script>
+        // JavaScript for rendering the Class Pie Chart
+        // Extract data from the Razor model and create a pie chart
+
+        function exportChart() {
+            // Export the pie chart as an image
+        }
+
+        // Attach the exportChart function to a button click event
+
+    </script>
+
+    <script>
+        // JavaScript for rendering the Scatter Chart
+        // Get data from the Razor Model and prepare it for Chart.js
+        // Create a scatter plot using Chart.js
+
+        // Initialize jQuery and other behaviors
+    </script>
+</body>
+</html>

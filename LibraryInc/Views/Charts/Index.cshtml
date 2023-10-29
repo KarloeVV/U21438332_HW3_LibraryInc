@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null; // Disabling layout for this view
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Type Chart</title>
+
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Include Bootstrap and related libraries -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar for navigation -->
+    <div id="sidebar" class="sidebar-toggle">
+        <!-- Sidebar navigation items and sub-menus -->
+    </div>
+    <!-- /#sidebar -->
+
+    <div style="width: 50%;">
+        <canvas id="myChart"></canvas> <!-- Canvas for displaying the chart -->
+    </div>
+
+    <button id="exportChart">Export Chart</button> <!-- Button to export the chart -->
+    <img id="exportedImage" style="display: none;"> <!-- Hidden image for exporting the chart -->
+
+    <h3>Most Popular Books:</h3>
+    <table>
+        <tr>
+            <th>Book Name</th>
+            <th>Total Borrows</th>
+        </tr>
+        <!-- Display a table of most popular books and their total borrows -->
+    </table>
+
+    <script>
+    var chartData = @Html.Raw(Json.Encode(Model)); // Model contains the chart data
+
+    // Create a bar chart using Chart.js
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.Labels, // X-axis labels
+            datasets: [{
+                label: 'Number of Books',
+                data: chartData.Values, // Data values for the chart
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // Y-axis starts from zero
+                }
+            }
+        }
+    });
+
+    // Function to export the chart as an image
+    function exportChart() {
+        // Export the chart as an image
+    }
+
+    // Attach the exportChart function to the button click event
+
+    </script>
+
+    <script>
+        // JavaScript for enabling sidebar navigation and adding active class to current link
+
+        // Initialize jQuery and other behaviors
+    </script>
+</body>
+</html>

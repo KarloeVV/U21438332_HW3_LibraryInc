@@ -1,0 +1,56 @@
+﻿@model LibraryInc.Models.authors
+
+@{
+    Layout = null; // Disables the layout for this view.
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery") // Renders jQuery scripts.
+    @Scripts.Render("~/bundles/jqueryval") // Renders jQuery validation scripts.
+
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken() // Helps prevent cross-site request forgery (CSRF) attacks.
+
+        <div class="form-horizontal">
+            <h4>authors</h4>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" }) // Displays validation errors.
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.surname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.surname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" /> <!-- Form submission button. -->
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index") <!-- Link to navigate back to the list view. -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<LibraryInc.Models.authors> // Specifies the model type for this view
+
+@{
+    Layout = null; // Disables layout for this view
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create") <!-- Link to create a new author -->
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name) <!-- Display the column header for 'name' -->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.surname) <!-- Display the column header for 'surname' -->
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {<!-- Loop through each author in the model -->
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name) <!-- Display the 'name' property for the current author -->
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.surname) <!-- Display the 'surname' property for the current author -->
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.authorId }) | <!-- Link to edit the current author -->
+                    @Html.ActionLink("Details", "Details", new { id = item.authorId }) | <!-- Link to view details of the current author -->
+                    @Html.ActionLink("Delete", "Delete", new { id = item.authorId }) <!-- Link to delete the current author -->
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿@model LibraryInc.Models.authors
+
+@{
+    Layout = null; // Disables the layout for this view.
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>authors</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name) <!-- Display the label for the 'name' property. -->
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.name) <!-- Display the 'name' property. -->
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.surname) <!-- Display the label for the 'surname' property. -->
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.surname) <!-- Display the 'surname' property. -->
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.authorId }) <!-- Link to the 'Edit' action with the author's ID. -->
+        |
+        @Html.ActionLink("Back to List", "Index") <!-- Link to navigate back to the list view. -->
+    </p>
+</body>
+</html>

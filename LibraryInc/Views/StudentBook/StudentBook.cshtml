@@ -1,0 +1,238 @@
+﻿@model LibraryInc.Models.StudentBookViewModel
+@{
+    ViewBag.Title = "StudentBook";
+}
+@using PagedList.Mvc
+<style>
+
+    .create-lookup-link {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+        /* Change the button color on hover */
+        .create-lookup-link:hover {
+            background-color: #27898b;
+        }
+</style>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="col">
+            <a href="@Url.Action("Create", "Students")" class="btn btn-lg" style="border-radius: 20px; background-color:#27898b; color:white">Create</a>
+        </div>
+
+        <table class="table" style="width:100%">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Students.FirstOrDefault().name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Students.FirstOrDefault().surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Students.FirstOrDefault().birthdate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PageStudent.FirstOrDefault().gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Students.FirstOrDefault().@class)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Students.FirstOrDefault().point)
+                </th>
+            </tr>
+            @foreach (var item in Model.PageStudent)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.birthdate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.@class)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.point)
+                    </td>
+                    <td class="text-end">
+                        <!-- Add text-end class here -->
+                        <a href="#" class="edit-link" data-url="@Url.Action("Edit", "Students", new { id = item.studentId })">Edit</a>
+                        <a href="#" class="details-link" data-url="@Url.Action("Details", "Students", new { id = item.studentId })">Details</a>
+                        <a href="#" class="delete-link" data-url="@Url.Action("Delete", "Students", new { id = item.studentId })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="pagination" style="margin-left: 50px;">
+            Page @(Model.PageStudent.PageCount < Model.PageStudent.PageNumber ? 0 : Model.PageStudent.PageNumber)
+            of @Model.PageStudent.PageCount
+            <br />
+            <div style="margin-top: 30px;">
+                @Html.PagedListPager(Model.PageStudent, Page => Url.Action("StudentBook", new { Page }))
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="col">
+            <a href="@Url.Action("Create", "Books")" class="btn btn-lg" style="border-radius: 20px; background-color:#27898b; color:white">Create</a>
+        </div>
+
+        <table class="table" style="width:100%">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Books.FirstOrDefault().name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Books.FirstOrDefault().pagecount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Books.FirstOrDefault().point)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Books.FirstOrDefault().authors)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Books.FirstOrDefault().types)
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Books)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pagecount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.point)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.authors.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.types.name)
+                    </td>
+
+                    <td>
+
+                        @if (Model.Borrowz != null && Model.Borrowz.Any(b => b.bookId == item.bookId))
+                        {
+                            var borrow = Model.Borrowz.First(b => b.bookId == item.bookId);
+                            @*@Html.DisplayFor(modelItem => borrow.takenDate)
+                            @Html.DisplayFor(modelItem => borrow.broughtDate)*@
+
+
+                            if (borrow.broughtDate > borrow.takenDate)
+                            {
+
+                                <p>Available</p>
+
+
+                            }
+                            else
+                            {
+                                <p>UnAvailable</p>
+                            }
+                        }
+                        else
+                        {
+                         <p>Empty</p> 
+                        }
+
+
+                    </td>
+                    <td>
+                        <!-- Add text-end class here -->
+                        <a href="@Url.Action("Edit", "books", new { id = item.bookId })">Edit</a>
+                        <a href="#" class="details-link" data-url="@Url.Action("Details", "books", new { id = item.bookId })">Details</a>
+                        <a href="#" class="delete-link" data-url="@Url.Action("Delete", "books", new { id = item.bookId })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="pagination" style="margin-left: 50px;">
+            Page @(Model.Books.PageCount < Model.Books.PageNumber ? 0 : Model.Books.PageNumber)
+            of @Model.Books.PageCount
+            <br />
+            <div style="margin-top: 30px;">
+                @Html.PagedListPager(Model.Books, Page => Url.Action("StudentBook", new { Page }))
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-content">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        // Function to handle Edit link click event in the Combined View and Details modal
+        $(".edit-link, .edit-link-in-modal").click(function (e) {
+            e.preventDefault();
+            var url = $(this).data("url");
+
+            $.get(url, function (data) {
+                $("#modal-content").empty();
+                $("#modal-content").html(data);
+                $("#myModal").modal("show");
+            });
+        });
+
+        // Function to handle form submission within the modal
+        $("#modal-content").on("submit", "form", function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr("action");
+            var formData = form.serialize();
+
+            $.post(url, formData, function (data) {
+                $("#myModal").modal("hide");
+                location.reload();
+            });
+        });
+
+        // Function to handle other links (details, delete, create) within the modal
+        $(".details-link, .delete-link, .create-link, .create-lookup-link").click(function (e) {
+            e.preventDefault();
+            var url = $(this).data("url");
+
+            $.get(url, function (data) {
+                $("#modal-content").empty();
+                $("#modal-content").html(data);
+                $("#myModal").modal("show");
+            });
+        });
+    });
+</script>
